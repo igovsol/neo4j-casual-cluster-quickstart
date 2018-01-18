@@ -6,7 +6,7 @@ networks:
 services:
 
   core1:
-    image: neo4j:3.3.1-enterprise
+    image: igov/neo4j:3.3.1-enterprise
     networks:
       - lan
     ports:
@@ -21,8 +21,7 @@ services:
     environment:
 #      - NEO4J_AUTH=none
       - NEO4J_AUTH=neo4j/changeme
-      - NEO4J_dbms_mode=CORE
-      - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes      
+      - NEO4J_dbms_mode=CORE     
       - NEO4J_causalClustering_expectedCoreClusterSize=3
       - NEO4J_causalClustering_initialDiscoveryMembers=core1:5000,core2:5000,core3:5000
       - NEO4J_dbms_connector_http_listen__address=:7474
@@ -30,7 +29,7 @@ services:
       - NEO4J_dbms_connector_bolt_listen__address=:7687
 
   core2:
-    image: neo4j:3.3.1-enterprise
+    image: igov/neo4j:3.3.1-enterprise
     networks:
       - lan
     ports:
@@ -44,8 +43,7 @@ services:
       - $HOME/neo4j/neo4j-core1/plugins:/plugins      
     environment:
       - NEO4J_AUTH=neo4j/changeme
-      - NEO4J_dbms_mode=CORE
-      - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes      
+      - NEO4J_dbms_mode=CORE     
       - NEO4J_causalClustering_expectedCoreClusterSize=3
       - NEO4J_causalClustering_initialDiscoveryMembers=core1:5000,core2:5000,core3:5000
       - NEO4J_dbms_connector_http_listen__address=:7475
@@ -53,7 +51,7 @@ services:
       - NEO4J_dbms_connector_bolt_listen__address=:7688
       
   core3:
-    image: neo4j:3.3.1-enterprise   
+    image: igov/neo4j:3.3.1-enterprise  
     networks:
       - lan
     ports:
@@ -68,7 +66,6 @@ services:
     environment:
       - NEO4J_AUTH=neo4j/changeme
       - NEO4J_dbms_mode=CORE
-      - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes
       - NEO4J_causalClustering_expectedCoreClusterSize=3
       - NEO4J_causalClustering_initialDiscoveryMembers=core1:5000,core2:5000,core3:5000
       - NEO4J_dbms_connector_http_listen__address=:7476
@@ -76,7 +73,7 @@ services:
       - NEO4J_dbms_connector_bolt_listen__address=:7689
       
   read1:
-    image: neo4j:3.3.1-enterprise
+    image: igov/neo4j:3.3.1-enterprise
     networks:
       - lan
     ports:
@@ -90,8 +87,7 @@ services:
       - $HOME/neo4j/neo4j-core1/plugins:/plugins
     environment:
       - NEO4J_AUTH=neo4j/changeme
-      - NEO4J_dbms_mode=READ_REPLICA
-      - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes      
+      - NEO4J_dbms_mode=READ_REPLICA     
       - NEO4J_causalClustering_initialDiscoveryMembers=core1:5000,core2:5000,core3:5000
       - NEO4J_dbms_connector_http_listen__address=:7477
       - NEO4J_dbms_connector_https_listen__address=:6480      
@@ -99,7 +95,7 @@ services:
             
 # This core demonstrates that additional instances can be added after the initial core is established (ie: this instance is nost listed within "initialDiscoveryMembers")
   core4:
-    image: neo4j:3.3.1-enterprise
+    image: igov/neo4j:3.3.1-enterprise
     networks:
       - lan
     ports:
@@ -113,8 +109,7 @@ services:
       - $HOME/neo4j/neo4j-core1/plugins:/plugins
     environment:
       - NEO4J_AUTH=neo4j/changeme
-      - NEO4J_dbms_mode=CORE
-      - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes      
+      - NEO4J_dbms_mode=CORE     
 #      - NEO4J_causalClustering_expectedCoreClusterSize=3
       - NEO4J_causalClustering_initialDiscoveryMembers=core1:5000,core2:5000,core3:5000
       - NEO4J_dbms_connector_http_listen__address=:7478
