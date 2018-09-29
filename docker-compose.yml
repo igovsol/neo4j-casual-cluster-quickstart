@@ -6,7 +6,7 @@ networks:
 services:
 
   core1:
-    image: igov/neo4j:3.3.1-enterprise
+    image: graphfoundation/ongdb-enterprise:3.4
     networks:
       - lan
     ports:
@@ -22,14 +22,15 @@ services:
 #      - NEO4J_AUTH=none
       - NEO4J_AUTH=neo4j/changeme
       - NEO4J_dbms_mode=CORE     
-      - NEO4J_causalClustering_expectedCoreClusterSize=3
+      - NEO4J_causalClustering_minimumCoreClusterSizeAtFormation=2
+      - NEO4J_causalClustering_minimumCoreClusterSizeAtRuntime=2
       - NEO4J_causalClustering_initialDiscoveryMembers=core1:5000,core2:5000,core3:5000
       - NEO4J_dbms_connector_http_listen__address=:7474
       - NEO4J_dbms_connector_https_listen__address=:6477
       - NEO4J_dbms_connector_bolt_listen__address=:7687
 
   core2:
-    image: igov/neo4j:3.3.1-enterprise
+    image: graphfoundation/ongdb-enterprise:3.4
     networks:
       - lan
     ports:
@@ -44,14 +45,15 @@ services:
     environment:
       - NEO4J_AUTH=neo4j/changeme
       - NEO4J_dbms_mode=CORE     
-      - NEO4J_causalClustering_expectedCoreClusterSize=3
+      - NEO4J_causalClustering_minimumCoreClusterSizeAtFormation=2
+      - NEO4J_causalClustering_minimumCoreClusterSizeAtRuntime=2
       - NEO4J_causalClustering_initialDiscoveryMembers=core1:5000,core2:5000,core3:5000
       - NEO4J_dbms_connector_http_listen__address=:7475
       - NEO4J_dbms_connector_https_listen__address=:6478
       - NEO4J_dbms_connector_bolt_listen__address=:7688
       
   core3:
-    image: igov/neo4j:3.3.1-enterprise  
+    image: graphfoundation/ongdb-enterprise:3.4  
     networks:
       - lan
     ports:
@@ -66,14 +68,15 @@ services:
     environment:
       - NEO4J_AUTH=neo4j/changeme
       - NEO4J_dbms_mode=CORE
-      - NEO4J_causalClustering_expectedCoreClusterSize=3
+      - NEO4J_causalClustering_minimumCoreClusterSizeAtFormation=2
+      - NEO4J_causalClustering_minimumCoreClusterSizeAtRuntime=2
       - NEO4J_causalClustering_initialDiscoveryMembers=core1:5000,core2:5000,core3:5000
       - NEO4J_dbms_connector_http_listen__address=:7476
       - NEO4J_dbms_connector_https_listen__address=:6479      
       - NEO4J_dbms_connector_bolt_listen__address=:7689
       
   read1:
-    image: igov/neo4j:3.3.1-enterprise
+    image: graphfoundation/ongdb-enterprise:3.4
     networks:
       - lan
     ports:
@@ -95,7 +98,7 @@ services:
             
 # This core demonstrates that additional instances can be added after the initial core is established (ie: this instance is nost listed within "initialDiscoveryMembers")
   core4:
-    image: igov/neo4j:3.3.1-enterprise
+    image: graphfoundation/ongdb-enterprise:3.4
     networks:
       - lan
     ports:
@@ -110,7 +113,7 @@ services:
     environment:
       - NEO4J_AUTH=neo4j/changeme
       - NEO4J_dbms_mode=CORE     
-#      - NEO4J_causalClustering_expectedCoreClusterSize=3
+#      - NEO4J_causalClustering_expectedCoreClusterSize=2
       - NEO4J_causalClustering_initialDiscoveryMembers=core1:5000,core2:5000,core3:5000
       - NEO4J_dbms_connector_http_listen__address=:7478
       - NEO4J_dbms_connector_https_listen__address=:6481      
